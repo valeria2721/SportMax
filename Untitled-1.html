@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportStats</title>
+
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+<header>
+    <h1>SportStats</h1>
+    <p>Gestión de estadísticas deportivas</p>
+</header>
+
+<nav>
+    <a href="index.php">Inicio</a>
+    <a href="registrar.php">Registrar Jugador</a>
+</nav>
+
+<section class="contenedor">
+
+    <h2>Registro de Jugadores</h2>
+
+    <form action="registrar.php" method="POST">
+
+        <input
+        type="text"
+        name="nombre"
+        placeholder="Nombre del jugador"
+        required>
+
+        <input
+        type="text"
+        name="deporte"
+        placeholder="Deporte"
+        required>
+
+        <input
+        type="text"
+        name="estadistica"
+        placeholder="Estadística"
+        required>
+
+        <button type="submit">
+            Guardar
+        </button>
+
+    </form>
+
+</section>
+
+<footer>
+    <p>© 2026 SportStats</p>
+</footer>
+
+</body>
+</html>
