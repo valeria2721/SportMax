@@ -1,0 +1,192 @@
+<?php
+
+$conexion = new mysqli(
+"localhost",
+"root",
+"",
+"sportstats"
+);
+
+if($conexion->connect_error){
+die("Error de conexión con la base de datos");
+}
+
+if(isset($_POST['guardar'])){
+
+$nombre=$_POST['nombre'];
+$deporte=$_POST['deporte'];
+$equipo=$_POST['equipo'];
+$estadistica=$_POST['estadistica'];
+
+$sql="INSERT INTO jugadores
+(nombre,deporte,equipo,estadistica)
+VALUES
+('$nombre','$deporte','$equipo','$estadistica')";
+
+$conexion->query($sql);
+}
+
+$jugadores=$conexion->query(
+"SELECT * FROM jugadores"
+);
+
+?>
+
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>SportStats Pro</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:#f4f4f4;
+margin:0;
+}
+
+header{
+background:#0d6efd;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+.container{
+width:90%;
+margin:auto;
+margin-top:20px;
+background:white;
+padding:20px;
+border-radius:10px;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:8px 0;
+}
+
+button{
+background:#198754;
+color:white;
+border:none;
+padding:10px 20px;
+cursor:pointer;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:10px;
+text-align:center;
+}
+
+th{
+background:#0d6efd;
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>SPORTSTATS PRO</h1>
+
+<p>Sistema de Gestión Deportiva</p>
+
+</header>
+
+<div class="container">
+
+<h2>Registrar Jugador</h2>
+
+<form method="POST">
+
+<input
+type="text"
+name="nombre"
+placeholder="Nombre del jugador"
+required>
+
+<input
+type="text"
+name="deporte"
+placeholder="Deporte"
+required>
+
+<input
+type="text"
+name="equipo"
+placeholder="Equipo"
+required>
+
+<input
+type="text"
+name="estadistica"
+placeholder="Estadística"
+required>
+
+<button
+type="submit"
+name="guardar">
+
+Guardar Jugador
+
+</button>
+
+</form>
+
+<h2>Jugadores Registrados</h2>
+
+<table>
+
+<tr>
+
+<th>ID</th>
+<th>Nombre</th>
+<th>Deporte</th>
+<th>Equipo</th>
+<th>Estadística</th>
+
+</tr>
+
+<?php while($fila=$jugadores->fetch_assoc()){ ?>
+
+<tr>
+
+<td><?php echo $fila['id']; ?></td>
+
+<td><?php echo $fila['nombre']; ?></td>
+
+<td><?php echo $fila['deporte']; ?></td>
+
+<td><?php echo $fila['equipo']; ?></td>
+
+<td><?php echo $fila['estadistica']; ?></td>
+
+</tr>
+
+<?php } ?>
+
+</table>
+
+</div>
+
+</body>
+
+</html>
